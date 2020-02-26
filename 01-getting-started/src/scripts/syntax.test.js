@@ -42,3 +42,37 @@ test('notFunFunction ', () => {
     expect(functions.notFunFunction("John")).toBe("JohnNotFun");
     expect(functions.notFunFunction("Sally")).toBe("SallyNotFun");
 });
+test('Push to Front of array ', () => {
+    expect(functions.addToFrontArray([1,2,3])).toStrictEqual([10,1,2,3]);
+});
+test('Push to End of array ', () => {
+    expect(functions.addToEndArray([1,2,3])).toStrictEqual([1,2,3,10]);
+});
+test('Change last number to 7 ', () => {
+    expect(functions.changeLastTo7([1,2,3])).toStrictEqual([1,2,7]);
+    expect(functions.changeLastTo7([2,32,34,47])).toStrictEqual([2,32,34,7]);
+});
+test('For In Loop ', () => {
+    expect(functions.forInLoop({age:12,hair:"red",name:"Bob"})).toStrictEqual("12!");
+    expect(functions.forInLoop({hair:"black",mustache:"Yes",name:"Ed"})).toStrictEqual("black!");
+});
+test('While Loop ', () => {
+    expect(functions.whileLoop(2)).toStrictEqual(1);
+    expect(functions.whileLoop(4)).toStrictEqual(6);
+});
+test('Do While Loop ', () => {
+    expect(functions.doWhileLoop(2)).toStrictEqual(1);
+    expect(functions.doWhileLoop(4)).toStrictEqual(6);
+});
+test('For Each Loop ', () => {
+    expect(functions.forEachLoop([1,2,3])).toStrictEqual([3,4,5]);
+    expect(functions.forEachLoop([6,2,12])).toStrictEqual([8,4,14]);
+});
+test('Declare Object ', () => {
+    expect(functions.declareObjectAge(37)).toStrictEqual({age:37});
+    expect(functions.declareObjectAge(37)).toStrictEqual({age:37});
+});
+test('Lookup Keys ', () => {
+    expect(functions.lookUp("age")).toStrictEqual(37);
+    expect(functions.lookUp("hair")).toStrictEqual("red");
+});

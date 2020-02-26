@@ -86,5 +86,69 @@ const functions = {
     notFunFunction: (input) => {
         return input+"NotFun"
     }, 
+    addToFrontArray: (input) => {
+        input.unshift(10)
+        return input
+    }, 
+    addToEndArray: (input) => {
+        input.push(10)
+        return input
+    },
+    changeLastTo7: (input) => {
+        input.pop()
+        input.push(7)
+        return input
+    },
+    forLoop: (input) => {
+        let a = 0;
+        for (let i = 0; i < input.length; i++) {
+            a = a + input[i];
+        
+          }
+        return a
+    },
+    forInLoop: (input) => {
+        let x;
+        for (x in input){
+            x = input[x] +"!"
+            return x
+        }   
+    },
+    whileLoop: (input) => {
+        let i=0;
+        let a=0;
+        while (i < input){
+           a+=i;
+           i++;
+        }   
+        return a;
+    },
+    doWhileLoop: (input) => {
+        let i=0;
+        let a=0;
+       do {
+        a+=i;
+        i++;
+        }
+        while (i < input)  
+        return a;
+    },
+    forEachLoop: (input) => {
+        let a = [];
+        input.forEach(myFunction);
+        function myFunction(item) {
+            a.push(item+2)
+        }
+        return a
+    },
+    declareObjectAge: (input) => {
+
+      return {age:input}
+    },
+    lookUp: (input) => {
+        let a={age:37,hair:"red"}
+        return a[input]
+      },
 };
+
 export default functions;
