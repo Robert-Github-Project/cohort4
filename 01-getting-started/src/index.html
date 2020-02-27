@@ -89,7 +89,22 @@
             <span class="w3-xxlarge w3-text-white w3-wide">SIZE</span>
         </div>
     </div>
-
+    <!----------------Calculator------------------------>
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">Calculator</span><br>
+            <input id="input1"><br>
+            <button onclick= "clickAdd()">+</button>
+            <button onclick= "clickSubtract()">-</button>
+            <button onclick= "clickMultiply()">X</button>
+            <button onclick= "clickDivide()">/</button><br>
+            <input id="input2"><br>
+            <p class="w3-text-white w3-wide" >=</p>
+            <p class="w3-container w3-white w3-wide" id="output">Answer Here</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="calculator.js"></script>
+    <!----------------Calculator end------------------------>
     <div class="w3-content w3-container w3-padding-64 w3-center" id="idSize">
         Did you know that =>
         <input id="idNumber" type="number"> is a <span id="idNumberSize">unknown</span> number?
