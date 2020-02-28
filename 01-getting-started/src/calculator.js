@@ -13,8 +13,16 @@ const calcFunctions = {
     divide: (num1, num2) => {
         return num1 / num2;
     },
+    canTax: (num) => {  
+        if (num<48535) return num*0.15;
+        else if (num<53404) return (num-48535)*.205+7280.25;
+        else if (num<63895) return (num-53404)*.26+8278.395;
+        else if (num<214368) return (num-63895)*.29+11006.06;
+        else return 0.33*(num-214368) + 54643.23;
+    },
     
 };
+//---------------------Calculator-----------------------------
 function clickAdd() {
    console.log("click add function")
     let output = document.getElementById("output");
@@ -55,5 +63,16 @@ function clickSubtract() {
  
      output.innerHTML = input1/input2
  }
- 
+ //---------------------Canadian Taxes------------------------------
+ function clickTax() {
+    console.log("click Tax")
+    let outputTax = document.getElementById("outputTax");
+    let outputRevenue = document.getElementById("outputRevenue");
+     
+    var inputTax = Number(document.getElementById("inputIncome").value)
+
+
+    outputTax.innerHTML = calcFunctions.canTax(inputTax).toFixed(2);
+    outputRevenue.innerHTML = inputTax-calcFunctions.canTax(inputTax);
+ }
 //export default calcFunctions;
