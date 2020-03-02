@@ -20,7 +20,9 @@ const calcFunctions = {
         else if (num<214368) return (num-63895)*.29+11006.06;
         else return 0.33*(num-214368) + 54643.23;
     },
-    
+    totalArray: (arr) => {
+        
+    },
 };
 //---------------------Calculator-----------------------------
 function clickAdd() {
@@ -75,4 +77,25 @@ function clickSubtract() {
     outputTax.innerHTML = calcFunctions.canTax(inputTax).toFixed(2);
     outputRevenue.innerHTML = inputTax-calcFunctions.canTax(inputTax);
  }
-//export default calcFunctions;
+
+ //---------------------Canadian Taxes------------------------------
+let array=[]
+ function clickAddArray() {
+    var inputArr = Number(document.getElementById("inputArray").value);
+    console.log("add " +inputArr);
+    console.log( typeof inputArr);
+    let message = document.getElementById("message");
+    if (isNaN(inputArr) === false) {
+        array.push(inputArr)
+        message.innerHTML = inputArr +" has been added to the array :)";
+    } else  message.innerHTML = document.getElementById("inputArray").value +" is not a number :(";
+ }
+ function clickShowArray() {
+    message.innerHTML = array
+ }
+ function clickTotalArray() {
+   console.log("click Total")
+ }
+
+ 
+export default calcFunctions;

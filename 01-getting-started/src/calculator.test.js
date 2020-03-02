@@ -23,3 +23,6 @@ test('Check the Taxes', () => {
     expect(calcFunctions.canTax(100000)).toBe(21476.51);
     expect(calcFunctions.canTax(3000000)).toBe(973901.79); 
 });
+test('Check the Total Array', () => {
+    expect(calcFunctions.totalArray([6,2])).toBe(3); 
+});
