@@ -24,5 +24,10 @@ test('Check the Taxes', () => {
     expect(calcFunctions.canTax(3000000)).toBe(973901.79); 
 });
 test('Check the Total Array', () => {
-    expect(calcFunctions.totalArray([6,2])).toBe(3); 
+    expect(calcFunctions.totalArray([6,2])).toBe(8); 
+    expect(calcFunctions.totalArray([6,2,4,7])).toBe(19); 
+});
+test('Check the return Province', () => {
+    expect(calcFunctions.returnProvince("ab")).toBe("Alberta"); 
+    expect(calcFunctions.returnProvince("qc")).toBe("Quebec"); 
 });

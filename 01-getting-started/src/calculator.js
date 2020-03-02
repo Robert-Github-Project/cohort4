@@ -21,7 +21,14 @@ const calcFunctions = {
         else return 0.33*(num-214368) + 54643.23;
     },
     totalArray: (arr) => {
-        
+        let a = 0;
+        for (let i=0; i<arr.length;i++){
+            a=a+arr[i];
+        }
+        return a;
+    },
+    returnProvince: (num1) => {
+        return province[num1];
     },
 };
 //---------------------Calculator-----------------------------
@@ -78,7 +85,7 @@ function clickSubtract() {
     outputRevenue.innerHTML = inputTax-calcFunctions.canTax(inputTax);
  }
 
- //---------------------Canadian Taxes------------------------------
+ //---------------------Arrays------------------------------
 let array=[]
  function clickAddArray() {
     var inputArr = Number(document.getElementById("inputArray").value);
@@ -91,11 +98,38 @@ let array=[]
     } else  message.innerHTML = document.getElementById("inputArray").value +" is not a number :(";
  }
  function clickShowArray() {
+    let message = document.getElementById("message");
     message.innerHTML = array
  }
  function clickTotalArray() {
-   console.log("click Total")
+   console.log(calcFunctions.totalArray(array))
+   message.innerHTML = calcFunctions.totalArray(array)
+ }
+ function clickClearArray() {
+   console.log("clear click");
+   array=[];
+   message.innerHTML = "Array has been cleared"
+ }
+ //---------------------Dictionaries------------------------------
+let province ={
+    ab:"Alberta",
+    bc:"British Columbia",
+    mb:"Manitoba",
+    nl:"Newfoundland",
+    nb:"New Brunswick",
+    nt:"Northwest Territories",
+    nu:"Nanavut",
+    ns:"Nova Scotia",
+    on:"Ontario",
+    pe:"Prince Edward Island",
+    qc:"Quebec",
+    sk:"Saskatchewan",
+    yk:"Yukon"
+}
+ function clickLookupDict() {
+    let inputDict = document.getElementById("inputDict").value;
+    let dict = document.getElementById("dictionary");
+    dict.innerHTML = calcFunctions.returnProvince(inputDict)
  }
 
- 
-export default calcFunctions;
+//export default calcFunctions;
