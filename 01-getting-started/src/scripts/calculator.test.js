@@ -31,3 +31,6 @@ test('Check the return Province', () => {
     expect(calcFunctions.returnProvince("ab")).toBe("Alberta"); 
     expect(calcFunctions.returnProvince("qc")).toBe("Quebec"); 
 });
+test('Check the if NaN', () => {
+    expect(calcFunctions.ifNan(2)).toBe("2 has been added to the array :)"); 
+});

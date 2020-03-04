@@ -90,10 +90,10 @@
         <div class="w3-display-middle">
             <span class="w3-xxlarge w3-text-white w3-wide">Calculator</span><br>
             <input id="input1"><br>
-            <button onclick= "clickAdd()">+</button>
-            <button onclick= "clickSubtract()">-</button>
-            <button onclick= "clickMultiply()">X</button>
-            <button onclick= "clickDivide()">/</button><br>
+            <button id="idAdd">+</button>
+            <button id="idSubtract">-</button>
+            <button id="idMultiply">X</button>
+            <button id="idDivide">/</button><br>
             <input id="input2"><br>
             <p class="w3-text-white w3-wide" >=</p>
             <p class="w3-container w3-white w3-wide" id="output">Answer Here</p>
@@ -106,7 +106,7 @@
         <div class="w3-display-middle">
             <span class="w3-xxlarge w3-text-white w3-wide">Canadian Taxes</span><br>
             <input id="inputIncome"> Input Income<br>
-            <button onclick= "clickTax()">Enter</button>
+            <button id="idCanTax">Enter</button>
 
             <p class="w3-text-white w3-wide" >Taxes paid</p>
             <p class="w3-container w3-white w3-wide" id="outputTax">Answer Here</p>
@@ -121,10 +121,10 @@
         <div class="w3-display-middle">
             <span class="w3-xxlarge w3-text-white w3-wide">Working with Arrays</span><br>
             <input id="inputArray"><br>
-            <button onclick= "clickAddArray()">Add</button>
-            <button onclick= "clickShowArray()">Show</button>
-            <button onclick= "clickTotalArray()">Total</button>
-            <button onclick= "clickClearArray()">Clear</button><br>
+            <button id="idArrayAdd">Add</button>
+            <button id="idArrayShow">Show</button>
+            <button id="idArrayTotal">Total</button>
+            <button id="idArrayClear">Clear</button><br>
             <p class="w3-container w3-white w3-wide" id="message">Message Area</p>
         </div>
     </div>
@@ -134,7 +134,7 @@
         <div class="w3-display-middle">
             <span class="w3-xxlarge w3-text-white w3-wide">Working with Dictionaries</span><br>
             <input id="inputDict"><br>
-            <button onclick= "clickLookupDict()">Add</button>
+            <button id="idDict">Add</button>
             <p class="w3-container w3-white w3-wide" id="dictionary">Message Area</p>
         </div>
     </div>
@@ -170,7 +170,7 @@
 
 
     <script type="module" src="./scripts/main.js"></script>
-    <script type="text/javascript" src="calculator.js"></script>
+    <!-- <script type="text/javascript" src="./scripts/calculator.js"></script> -->
 
     <script>
         // Change style of navbar on scroll
