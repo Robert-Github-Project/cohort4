@@ -1,0 +1,17 @@
+/* div {
+    border: solid;
+} */
+/* p {
+    border: solid;
+} */
+.listClass {
+    border: solid;
+    background-color:lightgray;
+    margin: 10em;
+    padding-left: 5em;
+    padding-bottom: 1em;
+}
+.idP1 {
+    font-weight: bold;
+    font-size: 150%;
+}
