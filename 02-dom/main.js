@@ -30,3 +30,15 @@ idDeleteLast.addEventListener('click', (() =>   {
     console.log("delete");
     functions.deleteLast()
     }));  
+
+// ---------------------Card section-----------------
+let cardCounter=3
+idAddBefore1.addEventListener('click', (() =>   {
+    console.log("Add Before");
+    }));
+idAddAfter1.addEventListener('click', (() =>   {
+    console.log("Add after");
+    }));
+idDelete1.addEventListener('click', (() =>   {
+    console.log("Delete");
+    }));

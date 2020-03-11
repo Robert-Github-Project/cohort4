@@ -52,3 +52,40 @@ console.log(ol.textContent)
 expect(ol.children.length).toBe(2);
 expect(ol.children[ol.children.length-1].textContent).toBe("item 3");
 });
+
+test('Check Add before button', () => {
+    document.body.innerHTML =        
+    `    <div class="w3-row-padding">
+    <div class="w3-col s5">
+        <h1>Working with Cards!!</h1>
+        <div class="container">
+            <div class="card">
+          
+                <h4><b>Card 1</b></h4> 
+                <button id="idAddBefore1">Add before</button>
+                <button id="idAddAfter1">Add After</button><br>
+                <button id="idDelete1">Delete</button> 
+            </div>
+
+            <div class="card">
+                <h4><b>Card 2</b></h4> 
+                <button id="idAddBefore2">Add before</button>
+                <button id="idAddAfter2">Add After</button><br>
+                <button id="idDelete2">Delete</button> 
+            </div>    
+
+            <div class="card">
+                <h4><b>Card 3</b></h4> 
+                <button id="idAddBefore3">Add before</button>
+                <button id="idAddAfter3">Add After</button><br>
+                <button id="idDelete3">Delete</button> 
+        </div>
+        </div>
+    </div>`;
+    const card=document.getElementsByClassName("card")
+    functions.addBefore()
+console.log(card.length)
+expect(card.length).toBe(4);
+//expect(ol.children[ol.children.length-1].textContent).toBe("item 3");
+});
+

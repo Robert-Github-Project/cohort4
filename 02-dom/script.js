@@ -28,8 +28,11 @@ const functions = {
     deleteFirst: () => {
       console.log("working");
       idOl.children[0].remove(); 
+      },
+      // ----------Card Section-----------
+    addBefore: () => {
+      return 0
       }
-                
       
 }
 
