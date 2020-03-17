@@ -52,6 +52,11 @@ test('Change last number to 7 ', () => {
     expect(functions.changeLastTo7([1,2,3])).toStrictEqual([1,2,7]);
     expect(functions.changeLastTo7([2,32,34,47])).toStrictEqual([2,32,34,7]);
 });
+test('For Loop ', () => {
+    expect(functions.forLoop([1,2,3])).toStrictEqual(6);
+    expect(functions.forLoop([11,22,33])).toStrictEqual(66);
+});
+
 test('For In Loop ', () => {
     expect(functions.forInLoop({age:12,hair:"red",name:"Bob"})).toStrictEqual("12!");
     expect(functions.forInLoop({hair:"black",mustache:"Yes",name:"Ed"})).toStrictEqual("black!");

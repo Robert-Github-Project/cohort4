@@ -15,9 +15,7 @@
     font-weight: bold;
     font-size: 150%;
 }
-.container {
 
-}
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
@@ -52,4 +50,4 @@
   /* Control the right side */
   /* .right {
     right: 0;
-    } */ */
+    } */ 

@@ -63,14 +63,12 @@ idAdd.addEventListener('click', (() => {
  //---------------------Arrays------------------------------
  let array=[]
  idArrayAdd.addEventListener('click', (() =>  {
-    var inputArr = Number(document.getElementById("inputArray").value);
+    var inputArr = (document.getElementById("inputArray").value);
     console.log("add " +inputArr);
     console.log( typeof inputArr);
     let message = document.getElementById("message");
-    if (isNaN(inputArr) === false) {
-        array.push(inputArr)
-        message.innerHTML = inputArr +" has been added to the array :)";
-    } else  message.innerHTML = document.getElementById("inputArray").value +" is not a number :(";
+    message.innerHTML = calcFunctions.ifNan(inputArr,array);
+   
  }));
  idArrayShow.addEventListener('click', (() =>   {
     let message = document.getElementById("message");

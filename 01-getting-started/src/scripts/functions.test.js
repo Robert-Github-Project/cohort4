@@ -14,6 +14,11 @@ test('Does that add function work?', () => {
     expect(functions.add(101,202)).toBe(303);
 });
 
+test('Does that add function work?', () => {
+    expect(functions.subtract(3,2)).toBe(1);
+    expect(functions.subtract(101,51)).toBe(50);
+});
+
 test('Does isEven work?', () => {
     expect(functions.isEven(2)).toBe(true);
     expect(functions.isEven(1)).toBe(false);

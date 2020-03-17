@@ -27,12 +27,12 @@ const calcFunctions = {
         }
         return a;
     },
-    ifNan: (num1) => {
-        if (isNaN(num1) === false) {
-            array.push(inputArr)
-            message.innerHTML = num1 +" has been added to the array :)";
-        } else  message.innerHTML = num1+ "is not a number :(";
-        },
+    ifNan: (inp,nArr) => {
+        if (isNaN(inp) === false) {
+            nArr.push(Number(inp));
+            return inp +" has been added to the array :)";
+        } else  return inp + " is not a number :(";
+    },
     returnProvince: (num1) => {
         let province ={
             ab:"Alberta",
