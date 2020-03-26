@@ -1,5 +1,4 @@
 
-
     class Account {
 
         constructor(name, balance) {

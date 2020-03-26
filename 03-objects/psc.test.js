@@ -1,5 +1,5 @@
 import Account from './psc'
-
+import functions from './psc2'
 
 test('Check the balance', () => {
 
@@ -15,4 +15,15 @@ test('Check the balance', () => {
         expect(account1.check()).toBe(24); 
  
 });
+
+test('check ifNan', () => {
+
+console.log("test")
+
+        expect(functions.ifNan("AAA",2)).toBe("Account AAA has been created with $2");
+        expect(functions.ifNan("AAA","A")).toBe("A is an invalid entry!!!!  Please input a number");
+
+ 
+});
+
 
