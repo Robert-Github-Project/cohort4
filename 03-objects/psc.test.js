@@ -6,7 +6,6 @@ test('Check the balance', () => {
 
     const account1 = new Account.Account("Account1",25)
         expect(account1.name).toBe("Account1");
-
         expect(account1.balance).toBe(25); 
         expect(account1.check()).toBe(25); 
         account1.deposit(6);
@@ -18,8 +17,6 @@ test('Check the balance', () => {
 
 test('check ifNan', () => {
 
-console.log("test")
-
         expect(functions.ifNan("AAA",2)).toBe("Account AAA has been created with $2");
         expect(functions.ifNan("AAA","A")).toBe("A is an invalid entry!!!!  Please input a number");
 
@@ -30,32 +27,29 @@ console.log("test")
 
 test('Check the Account Controller', () => {
 
+         const onlyAccount = new Account.AccountController();
 
-        const onlyAccount = new Account.AccountController();
-
-
-       console.log(onlyAccount.accountArray);
        onlyAccount.addAccount("bb",30);
        expect(onlyAccount.accountArray[0].name).toBe("bb"); 
        onlyAccount.addAccount("cc",50);
        expect(onlyAccount.accountArray[1].name).toBe("cc"); 
-       console.log(onlyAccount.accountArray);
-       console.log(onlyAccount.accountArray[0].name);
-       onlyAccount.deleteAccount("bb")
-       expect(onlyAccount.accountArray[0].name).toBe("cc"); 
-       console.log(onlyAccount.accountArray[0].name);
+       onlyAccount.removeAccount("bb")
+       expect(onlyAccount.accountArray[0].name).toBe("cc");        
        onlyAccount.addAccount("dd",70);
-       expect(onlyAccount.total()).toBe(120); 
-
+       onlyAccount.addAccount("ee",60);
+       expect(onlyAccount.total()).toBe(180); 
+       console.log(onlyAccount.highestAccount());
        expect(onlyAccount.highestAccount()).toBe("dd"); 
+       console.log(onlyAccount.lowestAccount());
+       expect(onlyAccount.lowestAccount()).toBe("cc"); 
+       expect(onlyAccount.findAccount("cc")).toBe(0);        
+       expect(onlyAccount.findAccount("ee")).toBe(2); 
+       expect(onlyAccount.checkAccount("ee")).toBe(60); 
+       onlyAccount.withdrawlFrom("ee",30)
+       expect(onlyAccount.checkAccount("ee")).toBe(30); 
+       onlyAccount.depositTo("dd",40)
+       expect(onlyAccount.checkAccount("dd")).toBe(110); 
 
-        //     expect(account1.name).toBe("Account1");
-    
-        //     expect(account1.balance).toBe(25); 
-        //     expect(account1.check()).toBe(25); 
-        //     account1.deposit(6);
-        //     expect(account1.check()).toBe(31); 
-        //     account1.withdrawl(7);
-        //     expect(account1.check()).toBe(24); 
-     
+
+console.log(onlyAccount.accountArray)
 });
