@@ -2,13 +2,13 @@ import Account from './psc.js'
 import functions from './psc2.js'
 
 
-let account1 =""
+//let account1 =""
     
 idCreateAccount.addEventListener('click', (() =>   {
 
     let inputAccountName = document.getElementById("idInputAccountName").value;
     let inputAccountBalance = Number(document.getElementById("idInputAccountBalance").value);
-    account1 = new Account.Account(inputAccountName,inputAccountBalance)
+    var account1 = new Account.Account(inputAccountName,inputAccountBalance)
     console.log("Account Name: " + account1.name +"  Account Balance: " + account1.balance)
     let output1 = document.getElementById("idMessage1");
     console.log(inputAccountBalance)
