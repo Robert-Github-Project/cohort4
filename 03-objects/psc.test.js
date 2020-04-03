@@ -49,7 +49,23 @@ test('Check the Account Controller', () => {
        expect(onlyAccount.checkAccount("ee")).toBe(30); 
        onlyAccount.depositTo("dd",40)
        expect(onlyAccount.checkAccount("dd")).toBe(110); 
-
+       onlyAccount.removeAccount("ee")
 
 console.log(onlyAccount.accountArray)
 });
+
+test('Check addList', () => {
+        document.body.innerHTML =        
+        `<select  id=idOl>
+            <option id="item1">item 1</option>
+            <option id="item2">item 2</option>
+            <option id="item3">item 3</option>
+        </ol>`;
+        const ol=document.getElementById("idOl")
+        functions.addOption(idOl,"cheque")
+     
+    expect(ol.children.length).toBe(4);
+    expect(ol.children[1].textContent).toBe("item 2");
+    expect(ol.children[3].textContent).toBe("cheque");
+     
+    });
