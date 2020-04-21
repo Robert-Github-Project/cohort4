@@ -74,18 +74,21 @@ class AccountController {
 }
 class city {
 
-    constructor( name, latitude, longitude, population) {
-        
+    constructor(key, name, latitude, longitude, population) {
+
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.population = population;
-        //add key
+        this.key = key
+    }
+    show() {
+        return this.name + " has " + this.population + " people at position " + this.latitude + "/" + this.longitude;
     }
     movedIn(num) {
-         this.population = this.population + num;
-     }
-     movedOut(num) {
+        this.population = this.population + num;
+    }
+    movedOut(num) {
         this.population = this.population - num;
     }
     howBig() {
@@ -101,35 +104,75 @@ class city {
 class community {
 
     constructor() {
-        this.cities = {};
-        this.key=1
-        //change to counter
+        this.citiesArray = [];
+        this.counter = 1
+
     }
     createCity(name, latitude, longitude, population) {
-        let cityKey = this.key++
-        let AAA= new city(name, latitude, longitude, population);
-        this.cities[cityKey]=AAA;
+        let cityKey = this.counter++
+        this.citiesArray.push(new city(cityKey, name, latitude, longitude, population))
+        // let AAA= new city(cityKey, name, latitude, longitude, population);
+        // this.citiesArray[cityKey]=AAA;
     }
+    getKeyFromName(name) {
 
-    getCity(theKey) {
-        return this.cities[theKey];
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (name == this.citiesArray[i].name) {
+                return this.citiesArray[i].key
+            }
+        }
+
     }
+    keyPosition(theKey) {
 
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (theKey == this.citiesArray[i].key) {
+                return i
+            }
+        }
+    }
     deleteCity(key) {
-        delete this.cities[key];
+        // delete this.citiesArray[key];
+        this.citiesArray.splice(this.keyPosition(key), 1);
     }
-
-    // findAccount(name) {
-    //     for (let i = 0; i < this.accountArray.length; i++) {
-    //         if (name == this.accountArray[i].name) {
-    //             return i
-    //         }
-    //     }
-
-    //  }
-    // checkAccount(name) {
-    //     return this.accountArray[this.findAccount(name)].balance;
-    // }
+    whichSphere(name) {
+        if (this.citiesArray[this.keyPosition(this.getKeyFromName(name))].latitude > 0) {
+            return "Northern Hemisphere"
+        }
+        if (this.citiesArray[this.keyPosition(this.getKeyFromName(name))].latitude < 0) {
+            return "Southern Hemisphere"
+        }
+        return "You are on the Equator"
+    }
+    getMostNothern() {
+        let N = ""
+        let I = ""
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (this.citiesArray[i].latitude > N) {
+                N = this.citiesArray[i].latitude
+                I=i
+            }
+        }
+        return this.citiesArray[I].name
+    }
+    getMostSouthern() {
+        let S = ""
+        let I = ""
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            if (this.citiesArray[i].latitude < S) {
+                S = this.citiesArray[i].latitude
+                I=i
+            }
+        }
+        return this.citiesArray[I].name
+    }
+    getPopulation() {
+        let total = 0
+        for (let i = 0; i < this.citiesArray.length; i++) {
+            total = total + this.citiesArray[i].population
+        }
+        return total
+    }
     // depositTo(name, num) {
     //     this.accountArray[this.findAccount(name)].deposit(num);
     // }

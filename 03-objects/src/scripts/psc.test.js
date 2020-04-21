@@ -72,7 +72,7 @@ test('Check addList', () => {
 test('Check the city class', () => {
 
 
-    const newCity = new Account.city("Bobsville", 13, 15, 1000)
+    const newCity = new Account.city(1, "Bobsville", 13, 15, 1000)
 
     expect(newCity.name).toBe("Bobsville");
     expect(newCity.population).toBe(1000);
@@ -87,8 +87,9 @@ test('Check the city class', () => {
     expect(newCity.howBig()).toBe("Hamlet");
     newCity.movedIn(20501);
     expect(newCity.howBig()).toBe("Large Town");
-    const secondCity = new Account.city("Tisdale", 167, 16, 100002)
+    const secondCity = new Account.city(2,"Tisdale", 167, 16, 100002)
     expect(secondCity.howBig()).toBe("City");
+    expect(secondCity.show()).toBe("Tisdale has 100002 people at position 167/16");
 });
 
 test('Check the Community ', () => {
@@ -96,33 +97,25 @@ test('Check the Community ', () => {
     const newComm = new Account.community();
 
     newComm.createCity("Waco", 20, 20, 20001);
-    console.log(newComm.cities)
-    expect(newComm.cities[1].name).toBe("Waco");
+    expect(newComm.citiesArray[0].name).toBe("Waco");
     newComm.createCity("Salem", 40, 40, 4004);
-    expect(newComm.cities[2].name).toBe("Salem");
-    console.log(newComm.cities);
-    expect(newComm.getCity(1).name).toBe("Waco");    
+    expect(newComm.citiesArray[1].name).toBe("Salem");
+    expect(newComm.getKeyFromName("Salem")).toBe(2);
+    expect(newComm.keyPosition(1)).toBe(0);
+    expect(newComm.keyPosition(2)).toBe(1);
     newComm.deleteCity(1);
-    expect(newComm.cities[1]).toBeUndefined(); 
-    console.log(newComm.cities);
-    //   newComm.addAccount("cc",50);
-    //   expect(newComm.accountArray[1].name).toBe("cc"); 
-    //   newComm.removeAccount("bb")
-    //   expect(newComm.accountArray[0].name).toBe("cc");        
-    //   newComm.addAccount("dd",70);
-    //   newComm.addAccount("ee",60);
-    //   expect(newComm.total()).toBe(180); 
-    //   console.log(newComm.highestAccount());
-    //   expect(newComm.highestAccount()).toBe("dd"); 
-    //   console.log(newComm.lowestAccount());
-    //   expect(newComm.lowestAccount()).toBe("cc"); 
-    //   expect(newComm.findAccount("cc")).toBe(0);        
-    //   expect(newComm.findAccount("ee")).toBe(2); 
-    //   expect(newComm.checkAccount("ee")).toBe(60); 
-    //   newComm.withdrawlFrom("ee",30)
-    //   expect(newComm.checkAccount("ee")).toBe(30); 
-    //   newComm.depositTo("dd",40)
-    //   expect(newComm.checkAccount("dd")).toBe(110); 
-    //   newComm.removeAccount("ee")
+    
+    expect(newComm.citiesArray.length).toBe(1); 
+    expect(newComm.keyPosition(newComm.getKeyFromName("Salem"))).toBe(0);
+    newComm.createCity("Cancun", -150, -300, 30000);
+    newComm.createCity("Tisdale", 200, 110, 30000);
+    newComm.createCity("Quito", 0, 78, 1978376);
+ console.log(newComm.citiesArray);
+    expect(newComm.whichSphere("Tisdale")).toBe("Northern Hemisphere"); 
+    expect(newComm.whichSphere("Cancun")).toBe("Southern Hemisphere"); 
+    expect(newComm.whichSphere("Quito")).toBe("You are on the Equator");
+    expect(newComm.getMostNothern()).toBe("Tisdale");
+    expect(newComm.getMostSouthern()).toBe("Cancun");
+    expect(newComm.getPopulation()).toBe(2042380);
 
 });
