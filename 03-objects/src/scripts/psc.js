@@ -22,10 +22,11 @@ class AccountController {
     constructor() {
         this.accountArray = [];
     }
-    addAccount(name, bal) {
-        this.accountArray.push(new Account(name, bal));
+    addAccount(name, balance) {
+        if (isNaN(balance) === false) {
+            this.accountArray.push(new Account(name, balance));
+        }
     }
-
     findAccount(name) {
         for (let i = 0; i < this.accountArray.length; i++) {
             if (name == this.accountArray[i].name) {
@@ -113,6 +114,7 @@ class community {
         this.citiesArray.push(new city(cityKey, name, latitude, longitude, population))
         // let AAA= new city(cityKey, name, latitude, longitude, population);
         // this.citiesArray[cityKey]=AAA;
+        return this.citiesArray[this.keyPosition(cityKey)]
     }
     getKeyFromName(name) {
 
@@ -150,7 +152,7 @@ class community {
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude > N) {
                 N = this.citiesArray[i].latitude
-                I=i
+                I = i
             }
         }
         return this.citiesArray[I].name
@@ -161,7 +163,7 @@ class community {
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude < S) {
                 S = this.citiesArray[i].latitude
-                I=i
+                I = i
             }
         }
         return this.citiesArray[I].name
@@ -173,37 +175,58 @@ class community {
         }
         return total
     }
-    // depositTo(name, num) {
-    //     this.accountArray[this.findAccount(name)].deposit(num);
-    // }
-    // withdrawlFrom(name, num) {
-    //     this.accountArray[this.findAccount(name)].withdrawl(num);
-    // }
-
-    // total() {
-    //     let total = 0
-    //     for (let i = 0; i < this.accountArray.length; i++) {
-    //         total = total + this.accountArray[i].balance
-    //     }
-    //     return total
-    // }
-    // highestAccount() {
-    //     let highest = 0;
-    //     for (let i = 0; i < this.accountArray.length; i++) {
-    //         if (this.accountArray[highest].balance < this.accountArray[i].balance) {
-    //             highest = [i];
-    //         }
-    //     }
-    //     return this.accountArray[highest].name
-    // }
-    // lowestAccount() {
-    //     let lowest = 0;
-    //     for (let i = 0; i < this.accountArray.length; i++) {
-    //         if (this.accountArray[lowest].balance > this.accountArray[i].balance) {
-    //             lowest = [i];
-    //         }
-    //     }
-    //     return this.accountArray[lowest].name
-    // }
 }
-export default { Account, AccountController, city, community };
+
+const functions = {
+    ifNan: (inputAccountName, inputAccountBalance) => {
+        if (isNaN(inputAccountBalance) === false) {
+            return "Account " + inputAccountName + " has been created with $" + inputAccountBalance;
+        } else return inputAccountBalance + " is an invalid entry!!!!  Please input a number";
+    },
+    addOption: (parent, accountName, balance) => {
+        if (isNaN(balance) === false) {
+            const option = document.createElement("option");
+            option.textContent = accountName;
+            parent.appendChild(option);
+        }
+    },
+    createCard: (city) => {
+
+        const div = document.createElement('div');
+        div.setAttribute('class', 'card')
+
+        const cityName = document.createElement('p');
+        cityName.setAttribute('class', 'idP1')
+        cityName.appendChild(document.createTextNode(city.name));
+        div.appendChild(cityName);
+
+
+        const lat = document.createElement('p');
+        lat.appendChild(document.createTextNode(`Latitide: ${city.latitude}`));
+        div.appendChild(lat);
+
+
+        const long = document.createElement('p');
+        long.appendChild(document.createTextNode(`Longitude: ${city.longitude}`));
+        div.appendChild(long);
+
+
+        const pop = document.createElement('p');
+        pop.appendChild(document.createTextNode(`Population: ${city.population}`));
+        div.appendChild(pop);
+
+
+        div.classList.add('card');
+
+        return div;
+    },
+    createAllCards: (array) => {
+        const parentNode = document.createElement('div');
+
+        for (let i = 0; i < array.length; i++) {
+            parentNode.appendChild(functions.createCard(array[i]));
+        }
+        return parentNode;
+    }
+}
+export default { Account, AccountController, city, community, functions };
