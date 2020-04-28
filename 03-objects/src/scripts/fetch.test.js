@@ -31,7 +31,6 @@ test('Testing getUsers.', async () =>{
     let data = await functions.getUsers(url);
     expect(data.length).toBe(10);
     await functions.workWithData(); 
-    
 });
 
 
@@ -65,6 +64,7 @@ const url = 'http://localhost:5000/';
     let data = await functions.postData(url + 'clear');
 
     data = await functions.postData(url + 'all');
+    console.log(data.status)
     expect(data.status).toEqual(200);
     expect(data.length).toBe(0);
 

@@ -138,10 +138,10 @@ class community {
         this.citiesArray.splice(this.keyPosition(key), 1);
     }
     whichSphere(name) {
-        if (this.citiesArray[this.keyPosition(this.getKeyFromName(name))].latitude > 0) {
+        if (this.citiesArray[this.keyPosition(name)].latitude > 0) {
             return "Northern Hemisphere"
         }
-        if (this.citiesArray[this.keyPosition(this.getKeyFromName(name))].latitude < 0) {
+        if (this.citiesArray[this.keyPosition(name)].latitude < 0) {
             return "Southern Hemisphere"
         }
         return "You are on the Equator"
@@ -227,6 +227,41 @@ const functions = {
             parentNode.appendChild(functions.createCard(array[i]));
         }
         return parentNode;
-    }
+    },
+
+    createSelectCity: (parentNode, array) => {
+        while (parentNode.firstChild) {
+            parentNode.removeChild(parentNode.lastChild);
+          }
+        for (let i = 0; i < array.length; i++) {
+            const option = document.createElement("option");
+            option.setAttribute('id', array[i].key);
+            option.textContent = array[i].name;
+            parentNode.appendChild(option);
+        }
+        return parentNode;
+    },
+    // async postData(url = '', data = {}) {
+    //     // Default options are marked with *
+    //     const response = await fetch(url, {
+    //         method: 'POST',     // *GET, POST, PUT, DELETE, etc.
+    //         mode: 'cors',       // no-cors, *cors, same-origin
+    //         cache: 'no-cache',  // *default, no-cache, reload, force-cache, only-if-cached
+    //         credentials: 'same-origin', // include, *same-origin, omit
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //             // 'Content-Type': 'application/x-www-form-urlencoded',
+    //         },
+    //         redirect: 'follow',         // manual, *follow, error
+    //         referrer: 'no-referrer',    // no-referrer, *client
+    //         body: JSON.stringify(data)  // body data type must match "Content-Type" header
+    //     });
+
+    //     const json = await response.json();    // parses JSON response into native JavaScript objects
+    //     json.status = response.status;
+    //     json.statusText = response.statusText;
+    //     // console.log(json, typeof(json));
+    //     return json;
+    // }
 }
 export default { Account, AccountController, city, community, functions };

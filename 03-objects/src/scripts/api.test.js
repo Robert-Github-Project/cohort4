@@ -28,7 +28,7 @@ test('test that the fetch works?', async () => {
 
     data = await postData(url + 'add', clients[0]);
     expect(data.status).toEqual(200);
-
+    
     data = await postData(url + 'all');
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
@@ -59,12 +59,13 @@ test('test that the fetch works?', async () => {
     expect(data.status).toEqual(200);
     expect(data.length).toBe(1);
     expect(data[0].name).toBe("George");
-
+  console.log(data);
     data = await postData(url + 'delete', {key:1});
     expect(data.status).toEqual(200);
 
     data = await postData(url + 'read', {key:1});
     expect(data.status).toEqual(400);
+  
 });
 
 

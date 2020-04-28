@@ -1,8 +1,31 @@
 import Account from './psc.js'
+import functions from './fetch.js'
 
 const community = new Account.community();
+// ------------setting up the server-----------
+const url = 'http://localhost:5000/';
+const cities = [
+    {
+        "1": { "key": 1, "city": "Calgary", "lat": 51.05, "long": -114.05 },
+        "2": { "key": 2, "city": "Edmonton", "lat": 53.55, "long": -113.49 },
+        "3": { "key": 3, "city": "Red Deer", "lat": 52.28, "long": -113.81 }
+    }
+];
 
-idCreateCity.addEventListener('click', (() => {
+
+// Check that the server is running and clear any data
+window.addEventListener('DOMContentLoaded', async () => {
+let data = await functions.postData(url + 'clear');
+});
+// data = await postData(url + 'all');
+// console.log(data.status)
+// data =  functions.postData(url + 'all');
+// console.log(data.status)
+
+// // data = await postData(url + 'add', database[0]);
+// // console.log(data.status)
+
+idCreateCity.addEventListener('click', (async() => {
     //-------delete all cards
     let container = document.getElementById('idContainer');
     container.innerHTML = "";
@@ -16,17 +39,32 @@ idCreateCity.addEventListener('click', (() => {
     let cityOutput = document.getElementById("idContainer");
     community.createCity(inputCityName, inputLatitude, inputLongitude, inputPopulation);
     cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
-
-    // const select=document.getElementById("idSelectAccount")
-    // Account.functions.addOption(select,inputAccountName,inputAccountBalance)
+    //--------add cities to selector
+    const citySelect=document.getElementById("idSelectCity");
+    Account.functions.createSelectCity(citySelect,community.citiesArray);
+    console.log(citySelect)
+    // citySelect.appendChild(optionsNode)
     console.log(community.citiesArray)
+
+}));
+//onselectionchange
+// how to get key from selector
+// let selectedCity = document.getElementById("idSelectCity");
+// let selectedKey=selectedCity.options[selectedCity.selectedIndex].id
+idSelectCity.addEventListener('click', (() => {
+console.log("select Click");
+    let selectedCity = document.getElementById("idSelectCity");
+    let selectedKey=selectedCity.options[selectedCity.selectedIndex].id
+    console.log(selectedKey);
+    let selectOutput = document.getElementById("idMessage4");
+    selectOutput.textContent = "Total Population of all cities is: "+community.whichSphere(selectedKey);
 
 }));
 idTotalPopulation.addEventListener('click', (() => {
 
     let outputTotal = document.getElementById("idMessage4");
-    outputTotal.textContent = "Total Population of all cities is: " + community.getPopulation() ;
-    
+    outputTotal.textContent = "Total Population of all cities is: " + community.getPopulation();
+
 }));
 //----------------------  Bank account creator----------------------------
 

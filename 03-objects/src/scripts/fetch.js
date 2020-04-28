@@ -39,9 +39,11 @@ const functions = {
         }
     },
 
-    async getUsers(url) {
+    async getUsers(aaa) {
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
+            let jjj ='https://jsonplaceholder.typicode.com/users'
+        //try to figure out how to refference a url instead of hardcoding
+            const response = await fetch(jjj);
             const data = await response.json();
             return data;
         } catch (error) {

@@ -108,9 +108,9 @@ test('Check the Community ', () => {
     newComm.createCity("Cancun", -150, -300, 30000);
     newComm.createCity("Tisdale", 200, 110, 30000);
     newComm.createCity("Quito", 0, 78, 1978376);
-    expect(newComm.whichSphere("Tisdale")).toBe("Northern Hemisphere"); 
-    expect(newComm.whichSphere("Cancun")).toBe("Southern Hemisphere"); 
-    expect(newComm.whichSphere("Quito")).toBe("You are on the Equator");
+    expect(newComm.whichSphere(4)).toBe("Northern Hemisphere"); 
+    expect(newComm.whichSphere(3)).toBe("Southern Hemisphere"); 
+    expect(newComm.whichSphere(5)).toBe("You are on the Equator");
     expect(newComm.getMostNothern()).toBe("Tisdale");
     expect(newComm.getMostSouthern()).toBe("Cancun");
     expect(newComm.getPopulation()).toBe(2042380);
@@ -129,7 +129,7 @@ test('Does the createCard function work?', () => {
    expect(group.children[0].children[1].textContent).toBe("Latitide: 13");
 
 }); 
-test('Does the createCard function work?', () => {
+test('Does the createAllCards function work?', () => {
     const newComm = new Account.community();
     newComm.createCity("Bobsville", 13, 15, 1000);
     newComm.createCity("Salem", 40, 40, 4004);
@@ -141,5 +141,30 @@ test('Does the createCard function work?', () => {
     expect(group.textContent).toBe("BobsvilleLatitide: 13Longitude: 15Population: 1000SalemLatitide: 40Longitude: 40Population: 4004");
  
     expect(group.children[0].children[1].children[3].textContent).toBe("Population: 4004");
+ 
+ }); 
+ test('Does the createCitySelector function work?', () => {
+    const newComm = new Account.community();
+    newComm.createCity("Bobsville", 13, 15, 1000);
+    newComm.createCity("Salem", 40, 40, 4004);
+    const group = document.createElement("select");
+    const option = document.createElement("option");
+    option.textContent = "bad City";
+    const option2 = document.createElement("option");
+    option2.textContent = "argva";
+    const option3 = document.createElement("option");
+    option3.textContent = "agrar";
+    group.appendChild(option);
+    const element = Account.functions.createSelectCity(group, newComm.citiesArray,group);
+    console.log(element.children[0].textContent);
+    console.log(element.children[1].textContent);
+    // group.appendChild(element);
+    console.log(group.children[0].textContent);
+    expect(element).toBeTruthy();
+    expect(element.children[0].textContent).toBe("Bobsville");
+    expect(element.children[0].id).toBe("1");
+    expect(element.children[1].textContent).toBe("Salem");
+    expect(element.children[1].id).toBe("2");
+    //expect(group.children[0].children[1].children[3].textContent).toBe("Population: 4004");
  
  }); 
