@@ -1,3 +1,4 @@
+global.fetch = require('node-fetch');
 import Account from './psc'
 // import functions from './psc2'
 
@@ -11,7 +12,7 @@ test('Check the balance', () => {
     expect(account1.check()).toBe(31);
     account1.withdrawl(7);
     expect(account1.check()).toBe(24);
-  });
+});
 
 test('check ifNan', () => {
 
@@ -62,11 +63,11 @@ test('Check addList', () => {
     expect(ol.children.length).toBe(4);
     expect(ol.children[1].textContent).toBe("item 2");
     expect(ol.children[3].textContent).toBe("cheque");
-    
+
     Account.functions.addOption(idOl, "cheque", "Not a number");
     //console.log(ol.children[4].textContent);
     expect(ol.children.length).toBe(4);
-    
+
 });
 
 test('Check the city class', () => {
@@ -86,7 +87,7 @@ test('Check the city class', () => {
     expect(newCity.howBig()).toBe("Hamlet");
     newCity.movedIn(20501);
     expect(newCity.howBig()).toBe("Large Town");
-    const secondCity = new Account.city(2,"Tisdale", 167, 16, 100002)
+    const secondCity = new Account.city(2, "Tisdale", 167, 16, 100002)
     expect(secondCity.howBig()).toBe("City");
     expect(secondCity.show()).toBe("Tisdale has 100002 people at position 167/16");
 });
@@ -103,13 +104,13 @@ test('Check the Community ', () => {
     expect(newComm.keyPosition(1)).toBe(0);
     expect(newComm.keyPosition(2)).toBe(1);
     newComm.deleteCity(1);
-    expect(newComm.citiesArray.length).toBe(1); 
+    expect(newComm.citiesArray.length).toBe(1);
     expect(newComm.keyPosition(newComm.getKeyFromName("Salem"))).toBe(0);
     newComm.createCity("Cancun", -150, -300, 30000);
     newComm.createCity("Tisdale", 200, 110, 30000);
     newComm.createCity("Quito", 0, 78, 1978376);
-    expect(newComm.whichSphere(4)).toBe("Northern Hemisphere"); 
-    expect(newComm.whichSphere(3)).toBe("Southern Hemisphere"); 
+    expect(newComm.whichSphere(4)).toBe("Northern Hemisphere");
+    expect(newComm.whichSphere(3)).toBe("Southern Hemisphere");
     expect(newComm.whichSphere(5)).toBe("You are on the Equator");
     expect(newComm.getMostNothern()).toBe("Tisdale");
     expect(newComm.getMostSouthern()).toBe("Cancun");
@@ -118,17 +119,17 @@ test('Check the Community ', () => {
 
 test('Does the createCard function work?', () => {
 
-   const newCity = new Account.city(1, "Bobsville", 13, 15, 1000)
-   const group = document.createElement("div");
-   const element = Account.functions.createCard(newCity);
-   group.appendChild(element);
+    const newCity = new Account.city(1, "Bobsville", 13, 15, 1000)
+    const group = document.createElement("div");
+    const element = Account.functions.createCard(newCity);
+    group.appendChild(element);
 
-   expect(element).toBeTruthy();
-   expect(group.textContent).toBe("BobsvilleLatitide: 13Longitude: 15Population: 1000");
+    expect(element).toBeTruthy();
+    expect(group.textContent).toBe("BobsvilleLatitide: 13Longitude: 15Population: 1000");
 
-   expect(group.children[0].children[1].textContent).toBe("Latitide: 13");
+    expect(group.children[0].children[1].textContent).toBe("Latitide: 13");
 
-}); 
+});
 test('Does the createAllCards function work?', () => {
     const newComm = new Account.community();
     newComm.createCity("Bobsville", 13, 15, 1000);
@@ -136,14 +137,14 @@ test('Does the createAllCards function work?', () => {
     const group = document.createElement("div");
     const element = Account.functions.createAllCards(newComm.citiesArray);
     group.appendChild(element);
- 
+
     expect(element).toBeTruthy();
     expect(group.textContent).toBe("BobsvilleLatitide: 13Longitude: 15Population: 1000SalemLatitide: 40Longitude: 40Population: 4004");
- 
+
     expect(group.children[0].children[1].children[3].textContent).toBe("Population: 4004");
- 
- }); 
- test('Does the createCitySelector function work?', () => {
+
+});
+test('Does the createCitySelector function work?', () => {
     const newComm = new Account.community();
     newComm.createCity("Bobsville", 13, 15, 1000);
     newComm.createCity("Salem", 40, 40, 4004);
@@ -155,16 +156,33 @@ test('Does the createAllCards function work?', () => {
     const option3 = document.createElement("option");
     option3.textContent = "agrar";
     group.appendChild(option);
-    const element = Account.functions.createSelectCity(group, newComm.citiesArray,group);
-    console.log(element.children[0].textContent);
-    console.log(element.children[1].textContent);
+    const element = Account.functions.createSelectCity(group, newComm.citiesArray, group);
+
     // group.appendChild(element);
-    console.log(group.children[0].textContent);
+
     expect(element).toBeTruthy();
-    expect(element.children[0].textContent).toBe("Bobsville");
-    expect(element.children[0].id).toBe("1");
-    expect(element.children[1].textContent).toBe("Salem");
-    expect(element.children[1].id).toBe("2");
+    expect(element.children[1].textContent).toBe("Bobsville");
+    expect(element.children[1].id).toBe("1");
+    expect(element.children[2].textContent).toBe("Salem");
+    expect(element.children[2].id).toBe("2");
     //expect(group.children[0].children[1].children[3].textContent).toBe("Population: 4004");
- 
- }); 
+});
+test('Check the From the Server', async () => {
+    let data="";
+    const url = 'http://localhost:5000/';
+    const newComm = new Account.community();
+    const cities = [
+        { "key": 2, "name": "Calgary", "latitude": 51.05, "longitude": -114.05, "population": 1300000 },
+        { "key": 5, "name": "Edmonton", "latitude": 53.55, "longitude": -113.49, "population": 1000000 },
+        { "key": 3, "name": "Red Deer", "latitude": 52.28, "longitude": -113.81, "population": 250000 }
+    ];
+    await newComm.fromserver(cities,url,data)
+    // expect(await newComm.fromserver(cities,url,data)).toBe("Calgary");
+    console.log(newComm.citiesArray)
+    expect(newComm.citiesArray[0].name).toBe("Calgary");
+    expect(newComm.citiesArray[1].population).toBe(1000000);
+    expect(newComm.citiesArray[2].longitude).toBe(-113.81);
+    // newComm.createCity("Bobsville", 13, 15, 1000);
+    // expect(newComm.getKeyFromName("Bobsville").toBe(4);
+
+});

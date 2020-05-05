@@ -3,68 +3,142 @@ import functions from './fetch.js'
 
 const community = new Account.community();
 // ------------setting up the server-----------
+let cityOutput = document.getElementById("idContainer");
+let data = ""
 const url = 'http://localhost:5000/';
 const cities = [
-    {
-        "1": { "key": 1, "city": "Calgary", "lat": 51.05, "long": -114.05 },
-        "2": { "key": 2, "city": "Edmonton", "lat": 53.55, "long": -113.49 },
-        "3": { "key": 3, "city": "Red Deer", "lat": 52.28, "long": -113.81 }
-    }
+    { "key": 1, "name": "Calgary", "latitude": 51.05, "longitude": -114.05, "population": 1300000 },
+    { "key": 2, "name": "Edmonton", "latitude": 53.55, "longitude": -113.49, "population": 1000000 },
+    { "key": 3, "name": "Red Deer", "latitude": 52.28, "longitude": -113.81, "population": 250000 }
 ];
-
 
 // Check that the server is running and clear any data
 window.addEventListener('DOMContentLoaded', async () => {
-let data = await functions.postData(url + 'clear');
+    data = await functions.postData(url + 'all');
+    community.fromserver(data)
+    //-----add all cards   
+    cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
+    //--------add cities to selector
+    const citySelect = document.getElementById("idSelectCity");
+    Account.functions.createSelectCity(citySelect, community.citiesArray);
+    console.log(data);
 });
-// data = await postData(url + 'all');
-// console.log(data.status)
-// data =  functions.postData(url + 'all');
-// console.log(data.status)
+idAddAlberta.addEventListener('click', (async () => {
+    data = await functions.postData(url + 'add', cities[0]);
+    data = await functions.postData(url + 'add', cities[1]);
+    data = await functions.postData(url + 'add', cities[2]);
 
-// // data = await postData(url + 'add', database[0]);
-// // console.log(data.status)
+}));
+idNukeServer.addEventListener('click', (async () => {
+    data = await functions.postData(url + 'clear');
+}));
 
-idCreateCity.addEventListener('click', (async() => {
+idCreateCity.addEventListener('click', (async () => {
     //-------delete all cards
     let container = document.getElementById('idContainer');
     container.innerHTML = "";
-
     console.log("click")
-    let inputCityName = document.getElementById("idCityName").value;
-    let inputLatitude = Number(document.getElementById("idLatitude").value);
-    let inputLongitude = document.getElementById("idLongitude").value;
-    let inputPopulation = Number(document.getElementById("idPopulation").value);
-    //-----add all cards
-    let cityOutput = document.getElementById("idContainer");
-    community.createCity(inputCityName, inputLatitude, inputLongitude, inputPopulation);
+    community.createCity(idCityName.value, Number(idLatitude.value), Number(idLongitude.value), Number(idPopulation.value));
+    //-----add all cards    
     cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
     //--------add cities to selector
-    const citySelect=document.getElementById("idSelectCity");
-    Account.functions.createSelectCity(citySelect,community.citiesArray);
+    const citySelect = document.getElementById("idSelectCity");
+    Account.functions.createSelectCity(citySelect, community.citiesArray);
     console.log(citySelect)
     // citySelect.appendChild(optionsNode)
     console.log(community.citiesArray)
-
+    console.log()
+    data = await functions.postData(url + 'add', community.citiesArray[community.keyPosition(community.getKeyFromName(idCityName.value))]);
 }));
 //onselectionchange
 // how to get key from selector
 // let selectedCity = document.getElementById("idSelectCity");
 // let selectedKey=selectedCity.options[selectedCity.selectedIndex].id
-idSelectCity.addEventListener('click', (() => {
-console.log("select Click");
+idSelectCity.addEventListener('change', ((e) => {
     let selectedCity = document.getElementById("idSelectCity");
-    let selectedKey=selectedCity.options[selectedCity.selectedIndex].id
-    console.log(selectedKey);
+    let selectedKey = selectedCity.options[selectedCity.selectedIndex].id
     let selectOutput = document.getElementById("idMessage4");
-    selectOutput.textContent = "Total Population of all cities is: "+community.whichSphere(selectedKey);
+    selectOutput.textContent = selectedCity.value + " is in the " + community.whichSphere(selectedKey);
 
 }));
 idTotalPopulation.addEventListener('click', (() => {
 
-    let outputTotal = document.getElementById("idMessage4");
+    let outputTotal = document.getElementById("idMessage5");
     outputTotal.textContent = "Total Population of all cities is: " + community.getPopulation();
 
+}));
+idGetNorthern.addEventListener('click', (() => {
+
+    let outputTotal = document.getElementById("idMessage5");
+    outputTotal.textContent = "The most Northern City is: " + community.getMostNothern();
+
+}));
+idGetSouthern.addEventListener('click', (() => {
+
+    let outputTotal = document.getElementById("idMessage5");
+    outputTotal.textContent = "The most Southern City is: " + community.getMostSouthern();
+
+}));
+idGetSouthern.addEventListener('click', (() => {
+
+    let outputTotal = document.getElementById("idMessage5");
+    outputTotal.textContent = "The most Southern City is: " + community.getMostSouthern();
+
+}));
+idHowBig.addEventListener('click', (() => {
+    let selectedCity = document.getElementById("idSelectCity");
+    let selectedKey = selectedCity.options[selectedCity.selectedIndex].id
+
+    let selectOutput = document.getElementById("idMessage4");
+
+    let howBig = community.citiesArray[community.keyPosition(selectedKey)].howBig()
+    selectOutput.textContent = selectedCity.value + " is a " + howBig;
+}));
+idMovedInButton.addEventListener('click', (() => {
+    let selectedCity = document.getElementById("idSelectCity");
+    let selectedKey = selectedCity.options[selectedCity.selectedIndex].id
+    let populationMovingIn = Number(document.getElementById("idMovedInInput").value)
+    let selectOutput = document.getElementById("idMessage4");
+    selectOutput.textContent = populationMovingIn + " people moved into " + selectedCity.value;
+    community.citiesArray[community.keyPosition(selectedKey)].movedIn(populationMovingIn)
+    //-------delete all cards
+    let container = document.getElementById('idContainer');
+    container.innerHTML = "";
+    //-----add all cards
+    cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
+}));
+idMovedOutButton.addEventListener('click', (async() => {
+    let selectedCity = document.getElementById("idSelectCity");
+    let selectedKey = selectedCity.options[selectedCity.selectedIndex].id
+    let populationMovingOut = Number(document.getElementById("idMovedOutInput").value)
+    let selectOutput = document.getElementById("idMessage4");
+    selectOutput.textContent = populationMovingOut + " people moved into " + selectedCity.value;
+    community.citiesArray[community.keyPosition(selectedKey)].movedOut(populationMovingOut)
+    //-------delete all cards-----
+    let container = document.getElementById('idContainer');
+    container.innerHTML = "";
+    //--------add all cards-------
+    cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
+    //--------update server-------
+    data = await functions.postData(url + 'update', {key:1, population:3});
+}));
+idDeleteCity.addEventListener('click', (async () => {
+    let selectedCity = document.getElementById("idSelectCity");
+    let selectedKey = selectedCity.options[selectedCity.selectedIndex].id;
+    console.log(selectedKey);
+    //--------delete from server
+    data = await functions.postData(url + 'delete', {key:Number(selectedKey)});   
+    let selectOutput = document.getElementById("idMessage4");
+    selectOutput.textContent = selectedCity.value + " has been deleted";
+    community.deleteCity(selectedKey);
+    //-------delete all cards
+    let container = document.getElementById('idContainer');
+    container.innerHTML = "";
+    //-----add all cards
+    cityOutput.appendChild(Account.functions.createAllCards(community.citiesArray));
+    //--------redo cities selector
+    const citySelect = document.getElementById("idSelectCity");
+    Account.functions.createSelectCity(citySelect, community.citiesArray);
 }));
 //----------------------  Bank account creator----------------------------
 

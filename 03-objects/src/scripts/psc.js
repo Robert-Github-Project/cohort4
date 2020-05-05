@@ -1,4 +1,6 @@
 
+import postFunc from './fetch.js'
+
 class Account {
 
     constructor(name, balance) {
@@ -83,6 +85,11 @@ class city {
         this.population = population;
         this.key = key
     }
+    //to sort k = data.sort((a,b) => {return b.key -a.key});
+    // if (data.status ===200) {
+    //         return DataCue;
+    // } return 'SERVER ERROR':
+    //     }
     show() {
         return this.name + " has " + this.population + " people at position " + this.latitude + "/" + this.longitude;
     }
@@ -107,7 +114,12 @@ class community {
     constructor() {
         this.citiesArray = [];
         this.counter = 1
-
+    }
+    fromserver(array) {
+        for (let i = 0; i < array.length; i++) {
+            this.counter=array[i].key;
+            this.createCity(array[i].name, array[i].latitude, array[i].longitude, array[i].population);
+         }
     }
     createCity(name, latitude, longitude, population) {
         let cityKey = this.counter++
@@ -147,7 +159,7 @@ class community {
         return "You are on the Equator"
     }
     getMostNothern() {
-        let N = ""
+        let N = -91
         let I = ""
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude > N) {
@@ -158,7 +170,7 @@ class community {
         return this.citiesArray[I].name
     }
     getMostSouthern() {
-        let S = ""
+        let S = 91
         let I = ""
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (this.citiesArray[i].latitude < S) {
@@ -230,9 +242,18 @@ const functions = {
     },
 
     createSelectCity: (parentNode, array) => {
+
+
         while (parentNode.firstChild) {
             parentNode.removeChild(parentNode.lastChild);
-          }
+        }
+
+        const option1 = document.createElement("option");
+        option1.setAttribute('id', "idFirst");
+        option1.setAttribute("disabled", "");
+        option1.setAttribute("selected", "");
+        option1.textContent = "--------";
+        parentNode.appendChild(option1);
         for (let i = 0; i < array.length; i++) {
             const option = document.createElement("option");
             option.setAttribute('id', array[i].key);

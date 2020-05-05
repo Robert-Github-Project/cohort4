@@ -11,19 +11,35 @@
 <body>
     <div class="community">
         <p class="idP1">Community!</p>
+        <button id="idAddAlberta">Add Alberta Cities</button><br>
+        <button id="idNukeServer">Nuke the Server</button> Warning!! This will delete all cities from the server
+        <br><br>
         <input id="idCityName"> City Name<br>
-        <input type="number" id="idLatitude"> Latitude<br>
+        <!-- set max and min -->
+        <input type="number" id="idLatitude" name="id" > Latitude<br>
         <input type="number" id="idLongitude"> Longitude<br>
         <input type="number" id="idPopulation"> Population<br><br>
         <button id="idCreateCity">Add City</button>
         <p class="line"></p>
         City Selector <select id="idSelectCity">
             <option>Please add a city</option>
-        </select><br>
+        </select>        <button id="idHowBig">How Big is it?</button>
         <p id="idMessage4"> ---------------------- </p>
+
+        <input type="number" id="idMovedInInput">        
+        <button id="idMovedInButton">People moving in</button>
+        <br>
+        <input type="number" id="idMovedOutInput">        
+        <button id="idMovedOutButton">People moving out</button>
+        <br><br>
+        <button id="idDeleteCity">Delete selected City</button>
+        <br>
         <p class="line"></p>
         <button id="idTotalPopulation">Total Population</button>
-        <p id="idMessage4"> ---------------------- </p>
+        <button id="idGetNorthern">Most Northern City</button>
+        <button id="idGetSouthern">Most Southern City</button>
+
+        <p id="idMessage5"> ---------------------- </p>
 
     </div>
     <div class="container" id="idContainer">

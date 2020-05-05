@@ -42,8 +42,8 @@ const functions = {
     async getUsers(aaa) {
         try {
             let jjj ='https://jsonplaceholder.typicode.com/users'
-        //try to figure out how to refference a url instead of hardcoding
-            const response = await fetch(jjj);
+        //hardcoding causes a get which works, referenceing causes a post which does not
+            const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const data = await response.json();
             return data;
         } catch (error) {
