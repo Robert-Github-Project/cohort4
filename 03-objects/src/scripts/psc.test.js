@@ -186,3 +186,12 @@ test('Check the From the Server', async () => {
     // expect(newComm.getKeyFromName("Bobsville").toBe(4);
 
 });
+test('Check the myCity', async () => {
+    let myCity= new Account.city(1,"Cowtown",79,-100,100000)
+    let myFav=myCity
+    myCity.movedIn(500)
+    console.log(myCity.population)
+    console.log(myFav.population)
+    expect(myCity.population).toBe(myFav.population);
+   
+});
