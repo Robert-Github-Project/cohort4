@@ -129,13 +129,11 @@ class community {
         return this.citiesArray[this.keyPosition(cityKey)]
     }
     getKeyFromName(name) {
-
         for (let i = 0; i < this.citiesArray.length; i++) {
             if (name == this.citiesArray[i].name) {
                 return this.citiesArray[i].key
             }
         }
-
     }
     keyPosition(theKey) {
 
@@ -203,7 +201,6 @@ const functions = {
         }
     },
     createCard: (city) => {
-
         const div = document.createElement('div');
         div.setAttribute('class', 'card')
 
@@ -212,28 +209,24 @@ const functions = {
         cityName.appendChild(document.createTextNode(city.name));
         div.appendChild(cityName);
 
-
         const lat = document.createElement('p');
         lat.appendChild(document.createTextNode(`Latitide: ${city.latitude}`));
         div.appendChild(lat);
-
 
         const long = document.createElement('p');
         long.appendChild(document.createTextNode(`Longitude: ${city.longitude}`));
         div.appendChild(long);
 
-
         const pop = document.createElement('p');
         pop.appendChild(document.createTextNode(`Population: ${city.population}`));
         div.appendChild(pop);
-
 
         div.classList.add('card');
 
         return div;
     },
-    createAllCards: (array) => {
-        const parentNode = document.createElement('div');
+    createAllCards: (array, parentNode) => {
+        //const parentNode = document.createElement('div');
 
         for (let i = 0; i < array.length; i++) {
             parentNode.appendChild(functions.createCard(array[i]));

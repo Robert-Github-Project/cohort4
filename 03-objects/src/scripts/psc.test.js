@@ -135,13 +135,13 @@ test('Does the createAllCards function work?', () => {
     newComm.createCity("Bobsville", 13, 15, 1000);
     newComm.createCity("Salem", 40, 40, 4004);
     const group = document.createElement("div");
-    const element = Account.functions.createAllCards(newComm.citiesArray);
-    group.appendChild(element);
+    Account.functions.createAllCards(newComm.citiesArray, group);
+    //group.appendChild(element);
 
-    expect(element).toBeTruthy();
+    expect(group.children[0]).toBeTruthy();
     expect(group.textContent).toBe("BobsvilleLatitide: 13Longitude: 15Population: 1000SalemLatitide: 40Longitude: 40Population: 4004");
 
-    expect(group.children[0].children[1].children[3].textContent).toBe("Population: 4004");
+    expect(group.children[1].children[3].textContent).toBe("Population: 4004");
 
 });
 test('Does the createCitySelector function work?', () => {
