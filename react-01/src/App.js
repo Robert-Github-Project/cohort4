@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MyComponent from './components/MyComponent';
+// import OddComponent from './components/OddComponent';
+// import EvenComponent from './components/EvenComponent';
 
 class App extends Component {
   constructor() {
@@ -31,9 +33,7 @@ class App extends Component {
         <button onClick={this.onPushMe}>
             Push Me
           </button>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+  
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -42,8 +42,8 @@ class App extends Component {
         >
           Learn React
         </a>
-        <MyComponent onPush={onPush} whatToSay ={whatever}
-          />
+        <MyComponent onPush={onPush} whatToSay ={whatever} counter={this.counter} />
+
       </header>
       
     </div>
