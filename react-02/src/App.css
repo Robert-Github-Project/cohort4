@@ -1,13 +1,10 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
      animation: Colour-Change infinite 20s linear;  
@@ -15,10 +12,9 @@
  
   }
 }
-
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +22,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
 .App-link {
   color: #61dafb;
 }
@@ -34,28 +29,21 @@
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
-  
-}
+  }
   to {
     transform: rotate(360deg);
-
   }
 }
-/* @keyframes Colour-Change {
+@keyframes App-logo-reverse {
   from {
-      background-color: blue;
-}
-  to {
-   background-color: #282c34;
+    transform: rotate(0deg);
   }
-} */
-/* .spiderContainer:hover {
-  background-color: yellow;
-
-} */
+  to {
+    transform: rotate(-360deg);
+  }
+}
 .spiders {
   height: 20vmin;
-  width: 20vmin;
   padding: 2vmin;
  
 }
@@ -66,6 +54,14 @@
 }
 .imgContainer:hover {
   background-color: red;
+}
+@keyframes imgContainer:hover {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 
 }
 .spiderContainer{
@@ -73,6 +69,5 @@ background-color: blue;
 background: blue;
 display:flex;
 justify-content: space-evenly;
-
 margin: 0 auto;
 }
