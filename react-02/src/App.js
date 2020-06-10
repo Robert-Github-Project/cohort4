@@ -6,12 +6,13 @@ import spider4 from './components/spider4.svg';
 import Logo from './components/logo.js';
 import Game from './tictactoe/ticTacToe.js';
 import './App.css';
+import Accounts from './accounts/Accounts.js';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      appToRender: <Game/>,
+      appToRender: <Accounts />,
     }
   }
   logoClick = (parm) => {
@@ -24,6 +25,9 @@ class App extends Component {
         break;
       case "TicTacToe":
         this.setState({ appToRender: <Game /> });
+        break;
+      case "Accounts":
+        this.setState({ appToRender: <Accounts /> });
         break;
       default:
         this.setState({ appToRender: <Logo /> });
@@ -41,7 +45,7 @@ class App extends Component {
 
           <div onClick={this.logoClick} todo="logo" className="imgContainer"><img src={spider1} className="App-logo spiders" alt="logo" /></div>
           <div onClick={this.logoClick} todo="TicTacToe" className="imgContainer"><img src={spider2} className="App-logo spiders" alt="logo" /></div>
-          <div className="imgContainer"><img src={spider3} className="App-logo spiders" alt="logo" /></div>
+          <div onClick={this.logoClick} todo="Accounts" className="imgContainer"><img src={spider3} className="App-logo spiders" alt="logo" /></div>
           <div className="imgContainer"><img src={spider4} className="App-logo spiders" alt="logo" /></div>
 
         </div>
