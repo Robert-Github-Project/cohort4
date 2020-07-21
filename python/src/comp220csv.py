@@ -15,13 +15,16 @@ with f as csvDataFile:
         break
     for row in csvReader:
         counter+=1
-        try:
-            classDict[row[0]]
-        except KeyError:
-           classDict[row[0]]=0 
-           classDict[row[0]]+=int(row[9])
-        else:
-            classDict[row[0]]+=int(row[9])
+        val= classDict.get(row[0],0)
+        classDict[row[0]] = val + int(row[9])
+        # print(row[0], val)
+        # try:
+        #     classDict[row[0]]
+        # except KeyError:
+        #    classDict[row[0]]=0 
+        #    classDict[row[0]]+=int(row[9])
+        # else:
+        #     classDict[row[0]]+=int(row[9])
 
         try:
             sectorDict[row[4]]
@@ -45,3 +48,5 @@ f.close()
 f=open("report.txt","r")
 print(f.read())
 f.close()
+for c in classDict:
+    print(c, classDict[c])
