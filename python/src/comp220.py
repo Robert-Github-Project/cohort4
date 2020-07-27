@@ -16,7 +16,6 @@ print(f"There are {totalLength} characters in the file")
 print(f"There are {counter} lines in this file")
 print(f"There are {totalElse} occurances of 'else'")
 
-
 path = 'C:/code/cohort4/01-getting-started/src/scripts'
 
 files = os.listdir(path)
