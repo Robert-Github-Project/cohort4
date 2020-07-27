@@ -16,3 +16,5 @@ def test_canTax():
     assert(persist.canTax(60000)==9993.355)
     assert(persist.canTax(100000)==21476.51)
     assert(persist.canTax(3000000)==973901.79)
+
+# in command line run "pytest"

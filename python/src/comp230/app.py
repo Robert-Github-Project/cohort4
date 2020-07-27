@@ -67,7 +67,7 @@ def invoice_printer():
       customer_name=customers[invoiced_customer_id]['name']
       customer_email=customers[invoiced_customer_id]['email']
       overall_price=0
-      print(CGREEN + f"Customer report for _{customer_name}_ regarding invoice #_{x}_ on {date} "+ CEND )
+      print(CGREEN + f"Customer report for {customer_name}, {customer_email} regarding invoice #_{x}_ on {date} "+ CEND )
       for y in itemsold: 
             if (itemsold[y]['invoice_id'])==x:
                   product_dict=itemsold[y]['product_id']

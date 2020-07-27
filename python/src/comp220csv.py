@@ -27,21 +27,19 @@ with f as csvDataFile:
         #     classDict[row[0]]+=int(row[9])
 
         try:
-            sectorDict[row[4]]
+           sectorDict[row[4]]
         except KeyError:
            sectorDict[row[4]]=0 
            sectorDict[row[4]]+=int(row[9])
         else:
             sectorDict[row[4]]+=int(row[9])
 f.close()       
-print(counter)
+print(f"There are {counter} rows of data")
 print(classDict)
 print(sectorDict)
 
 f=open("report.txt","w")
 f.write(f"There are {counter} lines.  Here is a summary of all Res_CNT")
-f.close()
-f=open("report.txt","a")
 f.write(str(classDict))
 f.write(str(sectorDict))
 f.close()
